@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Infinity Results - search</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="monetization" content="$ilp.uphold.com/AzDfkEqpUKeb">
+<link rel="search" type="application/opensearchdescription+xml" title="Infinity Search" href="https://infinitysearch.co/opensearch.xml">
+<script src="jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="https://infinitysearch.co/static/css/normalize.css">
+<style> a.toplink {
+        color: black;
+    } </style>
+<link rel="stylesheet" href="https://infinitysearch.co/static/css/bulma.min.css">
+<script src="js-cookie.js"></script>
+<script src="theme_top.js"></script>
+<link rel="stylesheet" href="https://infinitysearch.co/static/css/results.css">
+<script src="https://infinitysearch.co/static/js/masonry.min.js"></script>
+<script src="sortable.min.js"></script>
+<link href="https://infinitysearch.co/static/fonts/results_fonts.css" rel="stylesheet">
+<link rel="apple-touch-icon" sizes="180x180" href="https://infinitysearch.co/static/images/is/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://infinitysearch.co/static/images/is/favicon_32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://infinitysearch.co/static/images/is/favicon_16.png">
+<link rel="manifest" href="https://infinitysearch.co/static/images/is/site.webmanifest">
+<link rel="mask-icon" href="https://infinitysearch.co/static/images/is/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<style>
+            .card {
+                word-break: break-word;
+            }
+        </style>
+</head>
+<body>
+
+<div style="padding-top: 12px;"></div>
+<div class="column" style="padding-bottom: 0;">
+<div class="columns">
+<div class="column is-9">
+<form action="/results" method="post" id="input_form" autocomplete="off">
+<div id="form_div">
+<a href="/">
+<a href="/" style="display: inline-block; float: left;" id="logo_result">
+<span class="icon is-medium">
+<img id="logo_img_result" src="https://infinitysearch.co/static/images/is/logo_circle_black.png" height="49px" width="49px">
+</span>
+</a>
+</a>
+</div>
+</form>
+</div>
+<div id="dashboard_icons_area" class="column is-3 dashboard-right-desktop" style="text-align: right">
+<div id="dropdown_settings_area"></div>
+<div class="dropdown is-right" id="dropdown-settings">
+<div class="dropdown-trigger">
+<button type="button" class="button is-small" id="dropdown-settings-button" aria-haspopup="true" aria-controls="dropdown-settings-content">
+<img src="https://infinitysearch.co/static/images/fa/cog.svg" style="width: 16px; height: 16px; min-width: .87em;">
+</button>
+<button class="button is-small"><span class="icon"><img id="id-theme-image" src="search-solid.svg" style="width: 16px; height: 16px;"></span><span>Retrieve Patents</span></button>
+</div>
+<div class="dropdown-menu" id="dropdown-settings-content" role="menu">
+<div class="dropdown-content">
+<div class="dropdown-item" style="text-align: left;">
+</div>
+<hr class="dropdown-divider">
+<div class="dropdown-item" style="text-align: left;">
+<span class="cl-dropdown-text" style="display: inline-block; line-height: 2em;">font</span>
+<div class="select is-rounded is-small">
+<select id="font-select" onchange="fontChange()">
+<option value="BlinkMacSystemFont,-apple-system,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',Helvetica,Arial,sans-serif">
+default
+</option>
+<option value="'Roboto', sans-serif">roboto</option>
+<option value="'Alfa Slab One', cursive">alfa slab one</option>
+<option value="'Courier Prime', monospace">courier prime</option>
+<option value="'Grenze Gotisch', cursive">grenze gotisch</option>
+<option value="'Ubuntu', sans-serif">ubuntu</option>
+</select>
+</div>
+</div>
+<div class="dropdown-item" style="text-align: left;">
+<span class="cl-dropdown-text" style="display: inline-block; line-height: 2em;">size</span>
+<span>
+<button type="button" class="button is-small" id="font-minus"><img src="https://infinitysearch.co/static/images/fa/minus.svg" style="width: 12px; height: 12px;"></button>
+<button type="button" class="button is-small" id="font-size">7</button>
+<button type="button" class="button is-small" id="font-plus"><img src="https://infinitysearch.co/static/images/fa/plus.svg" style="width: 12px; height: 12px;"></button>
+</span>
+</div>
+<hr class="dropdown-divider">
+<div class="dropdown-item" style="text-align: center;">
+<button type="button" class="button is-small is-danger is-outlined" id="setting-reset">
+reset
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="column" style="margin-top: 5px; padding-bottom: 0;">
+<div class="tabs">
+<ul id="id-results-tabs">
+</ul>
+</div>
+</div>
+<div class="columns">
+<div class="column is-9 results_column" style="padding-top: 1.2rem; padding-right: .5rem;">
+    <br>
+<div class="field">
+  <label class="label">Paste Patent <span class="icon is-small"><img src="paste-solid.svg"></span></label>
+  <div class="control">
+    <textarea class="textarea is-info" placeholder="Input Patent"></textarea>
+  </div>
+  <br>
+  <button class="button is-success">Submit</button>
+</div>
+<br>
+<div class="field">
+  <label class="label">Summarised Patent <span class="icon is-small"><img src="pen-solid.svg"></span></label>
+  <div class="control">
+    <textarea class="textarea is-success" placeholder="Input Patent"></textarea>
+  </div>
+  <br>
+</div>
+
+</div>
+</div>
+
+<script>
+
+    function load_results(query, page_number) {
+        var path = String(window.location.pathname.split('/').pop());
+        if (path.startsWith('results')) {
+            window.history.pushState({}, 'Infinity Results - ' + query, '/' + path + '?q=' + query);
+        } else {
+            window.history.pushState({}, 'Infinity Results - ' + query, '/results/' + path + '?q=' + query);
+        }
+        document.title = 'Infinity Results - ' + query;
+        document.getElementById('results').innerHTML = '';
+        $('#loading_bar').show();
+        $('.footer').hide();
+        $.ajax({
+            type: 'POST',
+            url: '/results2',
+            xhrFields: { withCredentials: true},
+            data: {
+                'Search': query,
+                'page_number': page_number,
+                
+                
+            },
+            success: function (msg) {
+                $('#loading_bar').hide();
+                document.getElementById('results').innerHTML = msg;
+                $('.footer').show();
+                setSiteIconsAttr();
+
+                $('#ad').show(); 
+
+                initializeFontAttr();
+                initializeCondenseAttr();
+                initializeNewTabAttr();
+                initializeThemeAttr();
+                $("#unit-conversion").ready(function () {
+                    selectUnits();
+                });
+                colorPickerLoaded();
+                loadRandNumber();
+                stopwatchload();
+
+                // init Masonry
+                $('.grid').masonry({
+                    itemSelector: '.grid-item', percentPosition: true, columnWidth: '.grid-sizer'
+                });
+
+                
+                    loadRelatedTopics(query);
+                
+
+            }, error: function () {
+                $('#loading_bar').hide();
+
+                var error_msg = ```<div class="column" style="padding-top: 0"><div class="card"><div class="card-content"><div class="content">There was an error loading your results. <a href="/contact">contact us</a>  if this error persists.</div></div></div></div>```;
+                document.getElementById('results').innerHTML = error_msg;
+                $('.footer').show();
+            }
+        });
+    }
+
+    load_results('search', '1');
+    
+
+    function submit_new_search(event) {
+        event.preventDefault();
+
+        document.getElementById('externals').innerHTML = '';
+        loadExternalLinks();
+        initializeExternalsLayoutAttr();
+        initializeCondenseAttr();
+
+        var query = $('#search_query').val();
+        
+
+        if (query.startsWith('!')) {
+            window.location.href = 'https://infinitysearch.co/results?q=' + query;
+            return;
+        }
+
+        load_results(query, '1');
+        
+    }
+
+    var form = document.getElementById("input_form");
+    form.addEventListener("submit", submit_new_search, true);
+</script>
+<script src="results.js"></script>
+<script src="https://infinitysearch.co/static/js/unit_conversion.js" defer></script>
+<script src="https://infinitysearch.co/static/js/color_picker.js" defer></script>
+<script src="https://infinitysearch.co/static/js/rand_num_generation.js" defer></script>
+<script src="https://infinitysearch.co/static/js/stopwatch_timer.js" defer></script>
+<script src="theme_bottom.js" defer></script>
+<style id="custom_css_placeholder_results">
+
+</style>
+</body>
+</html>
