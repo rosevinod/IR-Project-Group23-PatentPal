@@ -37,17 +37,16 @@
 <div class="column" style="padding-bottom: 0;">
 <div class="columns">
 <div class="column is-9">
-<form action="/results" method="post" id="input_form" autocomplete="off">
 <div id="form_div">
 <a href="/">
 <a href="/" style="display: inline-block; float: left;" id="logo_result">
 <span class="icon is-medium">
-<img id="logo_img_result" src="https://infinitysearch.co/static/images/is/logo_circle_black.png" height="49px" width="49px">
+<img id="logo_img_result" src="{{url_for('static', filename='images/logo_pp.png')}}" height="49px" width="49px">
 </span>
 </a>
 </a>
 </div>
-</form>
+<h4 class="title is-4">&nbsp;&nbsp;&nbsp;&nbsp;Auto Summarisation</h4>
 </div>
 <div id="dashboard_icons_area" class="column is-3 dashboard-right-desktop" style="text-align: right">
 <div id="dropdown_settings_area"></div>
@@ -56,7 +55,7 @@
 <button type="button" class="button is-small" id="dropdown-settings-button" aria-haspopup="true" aria-controls="dropdown-settings-content">
 <img src="https://infinitysearch.co/static/images/fa/cog.svg" style="width: 16px; height: 16px; min-width: .87em;">
 </button>
-<button class="button is-small"><span class="icon"><img id="id-theme-image"src="{{url_for('static', filename='images/search-solid.svg')}}" style="width: 16px; height: 16px;"></span><span>Retrieve Patents</span></button>
+<button class="button is-small"><a href="{{ url_for('retrieval') }}"><span class="icon"><img id="id-theme-image"src="{{url_for('static', filename='images/search-solid.svg')}}" style="width: 16px; height: 16px;"></span><span>Retrieve Patents</span></a></button>
 </div>
 <div class="dropdown-menu" id="dropdown-settings-content" role="menu">
 <div class="dropdown-content">
@@ -127,93 +126,6 @@ reset
 </div>
 </div>
 
-<script>
-
-    function load_results(query, page_number) {
-        var path = String(window.location.pathname.split('/').pop());
-        if (path.startsWith('results')) {
-            window.history.pushState({}, 'Infinity Results - ' + query, '/' + path + '?q=' + query);
-        } else {
-            window.history.pushState({}, 'Infinity Results - ' + query, '/results/' + path + '?q=' + query);
-        }
-        document.title = 'Infinity Results - ' + query;
-        document.getElementById('results').innerHTML = '';
-        $('#loading_bar').show();
-        $('.footer').hide();
-        $.ajax({
-            type: 'POST',
-            url: '/results2',
-            xhrFields: { withCredentials: true},
-            data: {
-                'Search': query,
-                'page_number': page_number,
-                
-                
-            },
-            success: function (msg) {
-                $('#loading_bar').hide();
-                document.getElementById('results').innerHTML = msg;
-                $('.footer').show();
-                setSiteIconsAttr();
-
-                $('#ad').show(); 
-
-                initializeFontAttr();
-                initializeCondenseAttr();
-                initializeNewTabAttr();
-                initializeThemeAttr();
-                $("#unit-conversion").ready(function () {
-                    selectUnits();
-                });
-                colorPickerLoaded();
-                loadRandNumber();
-                stopwatchload();
-
-                // init Masonry
-                $('.grid').masonry({
-                    itemSelector: '.grid-item', percentPosition: true, columnWidth: '.grid-sizer'
-                });
-
-                
-                    loadRelatedTopics(query);
-                
-
-            }, error: function () {
-                $('#loading_bar').hide();
-
-                var error_msg = ```<div class="column" style="padding-top: 0"><div class="card"><div class="card-content"><div class="content">There was an error loading your results. <a href="/contact">contact us</a>  if this error persists.</div></div></div></div>```;
-                document.getElementById('results').innerHTML = error_msg;
-                $('.footer').show();
-            }
-        });
-    }
-
-    load_results('search', '1');
-    
-
-    function submit_new_search(event) {
-        event.preventDefault();
-
-        document.getElementById('externals').innerHTML = '';
-        loadExternalLinks();
-        initializeExternalsLayoutAttr();
-        initializeCondenseAttr();
-
-        var query = $('#search_query').val();
-        
-
-        if (query.startsWith('!')) {
-            window.location.href = 'https://infinitysearch.co/results?q=' + query;
-            return;
-        }
-
-        load_results(query, '1');
-        
-    }
-
-    var form = document.getElementById("input_form");
-    form.addEventListener("submit", submit_new_search, true);
-</script>
 <script type="text/javascript" src="{{url_for('static', filename='js/results.js')}}"></script>
 <script src="https://infinitysearch.co/static/js/unit_conversion.js" defer></script>
 <script src="https://infinitysearch.co/static/js/color_picker.js" defer></script>

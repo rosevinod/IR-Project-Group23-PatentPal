@@ -24,8 +24,8 @@
 <div id="page_style" class="Site-content page__style page__description">
 <div id="home_content">
 <div class="content column is-half is-offset-6" style="text-align: right">
-<button class="button"><span class="icon"><img id="id-theme-image" src="{{url_for('static', filename='images/search-solid.svg')}}" style="width: 16px; height: 16px;"></span><span>Retrieve Patents</span></button>
-<button class="button"><span class="icon"><img id="id-theme-image" src="{{url_for('static', filename='images/pen-solid.svg')}}"  style="width: 16px; height: 16px;"></span><span>Summarize</span></button>
+<button class="button"><a href="{{ url_for('retrieval') }}"><span class="icon"><img id="id-theme-image" src="{{url_for('static', filename='images/search-solid.svg')}}" style="width: 16px; height: 16px;"></span><span>Retrieve Patents</span></a></button>
+<button class="button"><a href="{{ url_for('summarise') }}"><span class="icon"><img id="id-theme-image" src="{{url_for('static', filename='images/pen-solid.svg')}}"  style="width: 16px; height: 16px;"></span><span>Summarize</span></a></button>
 </div>
 <div id="home_padding"></div>
 <div style="text-align: center;">
@@ -34,7 +34,7 @@
 </a>
 </div>
 <div class="content column is-half is-offset-one-quarter" style="margin-top: 30px; padding-bottom: 0; margin-bottom: 15px;">
-<form action="/results" method="post" id="input_form" autocomplete="off">
+<form action="/retrieval" method = "post" autocomplete="off">
 <div class="field has-addons">
 <div class="control is-expanded">
 <input id="search_query" class="input is-medium" type="search" placeholder="Search for patents" name="Search" autofocus="autofocus" onfocus="this.select()" required>
