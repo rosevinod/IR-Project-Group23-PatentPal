@@ -6,17 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="monetization" content="$ilp.uphold.com/AzDfkEqpUKeb">
 <link rel="search" type="application/opensearchdescription+xml" title="Infinity Search" href="https://infinitysearch.co/opensearch.xml">
-<script src="jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.4.1.min.js')}}"></script>
 <link rel="stylesheet" href="https://infinitysearch.co/static/css/normalize.css">
 <style> a.toplink {
         color: black;
     } </style>
 <link rel="stylesheet" href="https://infinitysearch.co/static/css/bulma.min.css">
-<script src="js-cookie.js"></script>
-<script src="theme_top.js"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/js-cookie.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/theme_top.js')}}" ></script>
 <link rel="stylesheet" href="https://infinitysearch.co/static/css/results.css">
 <script src="https://infinitysearch.co/static/js/masonry.min.js"></script>
-<script src="sortable.min.js"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/sortable.min.js')}}"></script>
 <link href="https://infinitysearch.co/static/fonts/results_fonts.css" rel="stylesheet">
 <link rel="apple-touch-icon" sizes="180x180" href="https://infinitysearch.co/static/images/is/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://infinitysearch.co/static/images/is/favicon_32.png">
@@ -65,7 +65,7 @@
 <button type="button" class="button is-small" id="dropdown-settings-button" aria-haspopup="true" aria-controls="dropdown-settings-content">
 <img src="https://infinitysearch.co/static/images/fa/cog.svg" style="width: 16px; height: 16px; min-width: .87em;">
 </button>
-<button class="button is-small"><span class="icon"><img id="id-theme-image" src="pen-solid.svg" style="width: 16px; height: 16px;"></span><span>Summarize</span></button>
+<button class="button is-small"><span class="icon"><img id="id-theme-image" src="{{url_for('static', filename='images/pen-solid.svg')}}" style="width: 16px; height: 16px;"></span><span>Summarize</span></button>
 </div>
 <div class="dropdown-menu" id="dropdown-settings-content" role="menu">
 <div class="dropdown-content">
@@ -269,12 +269,12 @@ more information, please read <a href="/update" target="_self">our post about th
     var form = document.getElementById("input_form");
     form.addEventListener("submit", submit_new_search, true);
 </script>
-<script src="results.js"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/results.js')}}"></script>
 <script src="https://infinitysearch.co/static/js/unit_conversion.js" defer></script>
 <script src="https://infinitysearch.co/static/js/color_picker.js" defer></script>
 <script src="https://infinitysearch.co/static/js/rand_num_generation.js" defer></script>
 <script src="https://infinitysearch.co/static/js/stopwatch_timer.js" defer></script>
-<script src="theme_bottom.js" defer></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/theme_bottom.js')}}" defer></script>
 <style id="custom_css_placeholder_results">
 
 </style>
