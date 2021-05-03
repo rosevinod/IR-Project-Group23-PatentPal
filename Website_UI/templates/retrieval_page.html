@@ -37,12 +37,12 @@
 <div class="column" style="padding-bottom: 0;">
 <div class="columns">
 <div class="column is-9">
-<form action="/results" method="post" id="input_form" autocomplete="off">
+<form action="/retrieval" method="post" id="input_form" autocomplete="off">
 <div id="form_div">
 <a href="/">
 <a href="/" style="display: inline-block; float: left;" id="logo_result">
 <span class="icon is-medium">
-<img id="logo_img_result" src="https://infinitysearch.co/static/images/is/logo_circle_black.png" height="49px" width="49px">
+<img id="logo_img_result" src="{{url_for('static', filename='images/logo_pp.png')}}" height="49px" width="49px">
 </span>
 </a>
 </a>
@@ -65,7 +65,7 @@
 <button type="button" class="button is-small" id="dropdown-settings-button" aria-haspopup="true" aria-controls="dropdown-settings-content">
 <img src="https://infinitysearch.co/static/images/fa/cog.svg" style="width: 16px; height: 16px; min-width: .87em;">
 </button>
-<button class="button is-small"><span class="icon"><img id="id-theme-image" src="{{url_for('static', filename='images/pen-solid.svg')}}" style="width: 16px; height: 16px;"></span><span>Summarize</span></button>
+<button class="button is-small"><a href="{{ url_for('summarise') }}"><span class="icon"><img id="id-theme-image" src="{{url_for('static', filename='images/pen-solid.svg')}}" style="width: 16px; height: 16px;"></span><span>Summarize</span></a></button>
 </div>
 <div class="dropdown-menu" id="dropdown-settings-content" role="menu">
 <div class="dropdown-content">
@@ -79,7 +79,7 @@
 <option value="BlinkMacSystemFont,-apple-system,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',Helvetica,Arial,sans-serif">
 default
 </option>
-<option value="'Roboto', sans-serif">roboto</option>
+<option valulogo_ppe="'Roboto', sans-serif">roboto</option>
 <option value="'Alfa Slab One', cursive">alfa slab one</option>
 <option value="'Courier Prime', monospace">courier prime</option>
 <option value="'Grenze Gotisch', cursive">grenze gotisch</option>
@@ -184,90 +184,90 @@ more information, please read <a href="/update" target="_self">our post about th
 
 <script>
 
-    function load_results(query, page_number) {
-        var path = String(window.location.pathname.split('/').pop());
-        if (path.startsWith('results')) {
-            window.history.pushState({}, 'Infinity Results - ' + query, '/' + path + '?q=' + query);
-        } else {
-            window.history.pushState({}, 'Infinity Results - ' + query, '/results/' + path + '?q=' + query);
-        }
-        document.title = 'Infinity Results - ' + query;
-        document.getElementById('results').innerHTML = '';
-        $('#loading_bar').show();
-        $('.footer').hide();
-        $.ajax({
-            type: 'POST',
-            url: '/results2',
-            xhrFields: { withCredentials: true},
-            data: {
-                'Search': query,
-                'page_number': page_number,
+    // function load_results(query, page_number) {
+    //     var path = String(window.location.pathname.split('/').pop());
+    //     if (path.startsWith('results')) {
+    //         window.history.pushState({}, 'Infinity Results - ' + query, '/' + path + '?q=' + query);
+    //     } else {
+    //         window.history.pushState({}, 'Infinity Results - ' + query, '/results/' + path + '?q=' + query);
+    //     }
+    //     document.title = 'Infinity Results - ' + query;
+    //     document.getElementById('results').innerHTML = '';
+    //     $('#loading_bar').show();
+    //     $('.footer').hide();
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/results2',
+    //         xhrFields: { withCredentials: true},
+    //         data: {
+    //             'Search': query,
+    //             'page_number': page_number,
                 
                 
-            },
-            success: function (msg) {
-                $('#loading_bar').hide();
-                document.getElementById('results').innerHTML = msg;
-                $('.footer').show();
-                setSiteIconsAttr();
+    //         },
+    //         success: function (msg) {
+    //             $('#loading_bar').hide();
+    //             document.getElementById('results').innerHTML = msg;
+    //             $('.footer').show();
+    //             setSiteIconsAttr();
 
-                $('#ad').show(); 
+    //             $('#ad').show(); 
 
-                initializeFontAttr();
-                initializeCondenseAttr();
-                initializeNewTabAttr();
-                initializeThemeAttr();
-                $("#unit-conversion").ready(function () {
-                    selectUnits();
-                });
-                colorPickerLoaded();
-                loadRandNumber();
-                stopwatchload();
+    //             initializeFontAttr();
+    //             initializeCondenseAttr();
+    //             initializeNewTabAttr();
+    //             initializeThemeAttr();
+    //             $("#unit-conversion").ready(function () {
+    //                 selectUnits();
+    //             });
+    //             colorPickerLoaded();
+    //             loadRandNumber();
+    //             stopwatchload();
 
-                // init Masonry
-                $('.grid').masonry({
-                    itemSelector: '.grid-item', percentPosition: true, columnWidth: '.grid-sizer'
-                });
+    //             // init Masonry
+    //             $('.grid').masonry({
+    //                 itemSelector: '.grid-item', percentPosition: true, columnWidth: '.grid-sizer'
+    //             });
 
                 
-                    loadRelatedTopics(query);
+    //                 loadRelatedTopics(query);
                 
 
-            }, error: function () {
-                $('#loading_bar').hide();
+    //         }, error: function () {
+    //             $('#loading_bar').hide();
 
-                var error_msg = ```<div class="column" style="padding-top: 0"><div class="card"><div class="card-content"><div class="content">There was an error loading your results. <a href="/contact">contact us</a>  if this error persists.</div></div></div></div>```;
-                document.getElementById('results').innerHTML = error_msg;
-                $('.footer').show();
-            }
-        });
-    }
+    //             var error_msg = ```<div class="column" style="padding-top: 0"><div class="card"><div class="card-content"><div class="content">There was an error loading your results. <a href="/contact">contact us</a>  if this error persists.</div></div></div></div>```;
+    //             document.getElementById('results').innerHTML = error_msg;
+    //             $('.footer').show();
+    //         }
+    //     });
+    // }
 
-    load_results('search', '1');
+    // load_results('search', '1');
     
 
-    function submit_new_search(event) {
-        event.preventDefault();
+    // function submit_new_search(event) {
+    //     event.preventDefault();
 
-        document.getElementById('externals').innerHTML = '';
-        loadExternalLinks();
-        initializeExternalsLayoutAttr();
-        initializeCondenseAttr();
+    //     document.getElementById('externals').innerHTML = '';
+    //     loadExternalLinks();
+    //     initializeExternalsLayoutAttr();
+    //     initializeCondenseAttr();
 
-        var query = $('#search_query').val();
+    //     var query = $('#search_query').val();
         
 
-        if (query.startsWith('!')) {
-            window.location.href = 'https://infinitysearch.co/results?q=' + query;
-            return;
-        }
+    //     if (query.startsWith('!')) {
+    //         window.location.href = 'https://infinitysearch.co/results?q=' + query;
+    //         return;
+    //     }
 
-        load_results(query, '1');
+    //     load_results(query, '1');
         
-    }
+    // }
 
-    var form = document.getElementById("input_form");
-    form.addEventListener("submit", submit_new_search, true);
+    // var form = document.getElementById("input_form");
+    // form.addEventListener("submit", submit_new_search, true);
 </script>
 <script type="text/javascript" src="{{url_for('static', filename='js/results.js')}}"></script>
 <script src="https://infinitysearch.co/static/js/unit_conversion.js" defer></script>
