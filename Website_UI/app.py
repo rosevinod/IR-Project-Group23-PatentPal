@@ -1,5 +1,6 @@
-from flask import Flask, render_template, url_for, redirect
-
+from flask import Flask, render_template, url_for, redirect, request
+import summary
+import random
 
 app = Flask(__name__)
 
@@ -15,7 +16,18 @@ def retrieval():
 
 @app.route("/summarise", methods = ['GET', 'POST'])
 def summarise():
-	return render_template("summary_page.html")
+	if request.form.get("Clear_Button"):
+		return render_template("summary_page.html", show_hidden = False)
+
+	if request.method == "POST":
+		input_text = request.form.get("input_patent")
+		# print(input_text)
+		if input_text != "":
+			output_text = summary.get_summary(input_text)
+			# output_text = "abcd" + str(random.randint(1, 100))
+			return render_template("summary_page.html", show_hidden = True, input_text = input_text, output_text = output_text)
+
+	return render_template("summary_page.html", show_hidden = False)
 
 
 if __name__ == "__main__":

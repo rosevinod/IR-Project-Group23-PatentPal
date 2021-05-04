@@ -107,21 +107,34 @@ reset
 <div class="column is-9 results_column" style="padding-top: 1.2rem; padding-right: .5rem;">
     <br>
 <div class="field">
+  
   <label class="label">Paste Patent <span class="icon is-small"><img src="{{url_for('static', filename='images/paste-solid.svg')}}"></span></label>
+  <form action="{{ url_for('summarise')}}" method="post">
   <div class="control">
-    <textarea class="textarea is-info" placeholder="Input Patent"></textarea>
+    <textarea class="textarea is-info" name = "input_patent" placeholder="Input Patent">{% if show_hidden == True %}{{input_text}}{% endif %}</textarea>
   </div>
-  <br>
-  <button class="button is-success">Submit</button>
+    <br>
+    <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-success">Submit</button>
+    </div>
+    <div class="control">
+      <button class="button is-warning" name = "Clear_Button" value="Clear">Clear</button>
+    </div>
+  </div>
+  </form>
 </div>
 <br>
+{% if show_hidden == True %}
 <div class="field">
   <label class="label">Summarised Patent <span class="icon is-small"><img src="{{url_for('static', filename='images/pen-solid.svg')}}"></span></label>
   <div class="control">
-    <textarea class="textarea is-success" placeholder="Input Patent"></textarea>
+    <textarea class="textarea is-success">{{output_text}}</textarea>
   </div>
   <br>
 </div>
+{% endif %}
+
 
 </div>
 </div>
