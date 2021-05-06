@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Infinity Results - search</title>
+<title>PatentPal - search</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="monetization" content="$ilp.uphold.com/AzDfkEqpUKeb">
 <link rel="search" type="application/opensearchdescription+xml" title="Infinity Search" href="https://infinitysearch.co/opensearch.xml">
@@ -11,6 +11,21 @@
 <style> a.toplink {
         color: black;
     } </style>
+<style>
+.collapsible {
+  cursor: pointer;
+}
+
+.active, .collapsible:hover {
+}
+
+.content1 {
+  padding: 16px 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+</style>
 <link rel="stylesheet" href="https://infinitysearch.co/static/css/bulma.min.css">
 <script type="text/javascript" src="{{url_for('static', filename='js/js-cookie.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/theme_top.js')}}" ></script>
@@ -48,7 +63,7 @@
 </a>
 <div id="input_text_area" class="field has-addons">
 <div class="control is-expanded" style="margin-left: 12px;">
-<input id="search_query" class="input is-small" type="search" placeholder="Enter Keywords" value="" name="Search" required>
+<textarea class="input is-small" name = "search_box" type="search" placeholder="Enter Keywords" value="" onfocus="this.select()" required>{% if show_hidden == True %}{{search_query}}{% endif %}</textarea>
 </div>
 <div class="control">
 <button class="button input is-small search-button-icon"><img src="https://infinitysearch.co/static/images/fa/search.svg" style="height: 22px; width: 22px; min-width: .87em;">
@@ -117,158 +132,38 @@ reset
 <div class="column is-9 results_column" style="padding-top: 1.2rem; padding-right: .5rem;">
 <div class="column" id="loading_bar" style="padding-top: 0;">
 <div class="column" style="padding-top: 0; padding-bottom: 0; margin-bottom: 0;"></div>
-<!-- <div class="card"> -->
-<!-- <div class="card-content"> -->
-<!-- <div class="content"> -->
-<!-- <progress class="progress is-large" max="100">60%</progress> -->
-<!-- <div class="column" style="padding-top: 0"> -->
-<div class="card" style="margin-bottom: 0.8rem;">
-<div class="card-content">
-<div class="content">
-We've made some changes to Infinity Search recently and we no longer have a free tier. To access our
-results,
-you will need to <a href="/login" target="_self">login to Pro</a> or become a <a href="https://coil.com/?ref=InfinitySearch2229" target="_self">Coil Member</a>. For
-more information, please read <a href="/update" target="_self">our post about this new change</a>.
-</div>
-</div>
-</div>
-<br>
-<div class="card" style="margin-bottom: 0.8rem;">
-<div class="card-content">
-<div class="content">
-We've made some changes to Infinity Search recently and we no longer have a free tier. To access our
-results,
-you will need to <a href="/login" target="_self">login to Pro</a> or become a <a href="https://coil.com/?ref=InfinitySearch2229" target="_self">Coil Member</a>. For
-more information, please read <a href="/update" target="_self">our post about this new change</a>.
-</div>
-</div>
-</div>
-<br>
-<div class="card" style="margin-bottom: 0.8rem;">
-<div class="card-content">
-<div class="content">
-We've made some changes to Infinity Search recently and we no longer have a free tier. To access our
-results,
-you will need to <a href="/login" target="_self">login to Pro</a> or become a <a href="https://coil.com/?ref=InfinitySearch2229" target="_self">Coil Member</a>. For
-more information, please read <a href="/update" target="_self">our post about this new change</a>.
-</div>
-</div>
-</div>
-<br>
-<div class="card" style="margin-bottom: 0.8rem;">
-<div class="card-content">
-<div class="content">
-We've made some changes to Infinity Search recently and we no longer have a free tier. To access our
-results,
-you will need to <a href="/login" target="_self">login to Pro</a> or become a <a href="https://coil.com/?ref=InfinitySearch2229" target="_self">Coil Member</a>. For
-more information, please read <a href="/update" target="_self">our post about this new change</a>.
-</div>
-</div>
-</div>
-<br>
-<div class="card" style="margin-bottom: 0.8rem;">
-<div class="card-content">
-<div class="content">
-We've made some changes to Infinity Search recently and we no longer have a free tier. To access our
-results,
-you will need to <a href="/login" target="_self">login to Pro</a> or become a <a href="https://coil.com/?ref=InfinitySearch2229" target="_self">Coil Member</a>. For
-more information, please read <a href="/update" target="_self">our post about this new change</a>.
-</div>
-</div>
-</div>
-<!-- </div> -->
-</div>
-</div>
-</div>
-<!-- </div> -->
+
+{% if show_hidden == True %}
+{%for i in range(0, len)%}
+    <div class="card" style="margin-bottom: 0.8rem;">
+    <div class="card-content">
+    <div class="content">
+    <div class = "collapsible">{{abstract_list[0]}}</div>
+    <div class = "content1"><p>{{description_list[0]}}</p></div> 
+    </div>
+    </div>
+    </div>
+    <br>
+{%endfor%}
+{% endif %}
 
 <script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
 
-    // function load_results(query, page_number) {
-    //     var path = String(window.location.pathname.split('/').pop());
-    //     if (path.startsWith('results')) {
-    //         window.history.pushState({}, 'Infinity Results - ' + query, '/' + path + '?q=' + query);
-    //     } else {
-    //         window.history.pushState({}, 'Infinity Results - ' + query, '/results/' + path + '?q=' + query);
-    //     }
-    //     document.title = 'Infinity Results - ' + query;
-    //     document.getElementById('results').innerHTML = '';
-    //     $('#loading_bar').show();
-    //     $('.footer').hide();
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: '/results2',
-    //         xhrFields: { withCredentials: true},
-    //         data: {
-    //             'Search': query,
-    //             'page_number': page_number,
-                
-                
-    //         },
-    //         success: function (msg) {
-    //             $('#loading_bar').hide();
-    //             document.getElementById('results').innerHTML = msg;
-    //             $('.footer').show();
-    //             setSiteIconsAttr();
-
-    //             $('#ad').show(); 
-
-    //             initializeFontAttr();
-    //             initializeCondenseAttr();
-    //             initializeNewTabAttr();
-    //             initializeThemeAttr();
-    //             $("#unit-conversion").ready(function () {
-    //                 selectUnits();
-    //             });
-    //             colorPickerLoaded();
-    //             loadRandNumber();
-    //             stopwatchload();
-
-    //             // init Masonry
-    //             $('.grid').masonry({
-    //                 itemSelector: '.grid-item', percentPosition: true, columnWidth: '.grid-sizer'
-    //             });
-
-                
-    //                 loadRelatedTopics(query);
-                
-
-    //         }, error: function () {
-    //             $('#loading_bar').hide();
-
-    //             var error_msg = ```<div class="column" style="padding-top: 0"><div class="card"><div class="card-content"><div class="content">There was an error loading your results. <a href="/contact">contact us</a>  if this error persists.</div></div></div></div>```;
-    //             document.getElementById('results').innerHTML = error_msg;
-    //             $('.footer').show();
-    //         }
-    //     });
-    // }
-
-    // load_results('search', '1');
-    
-
-    // function submit_new_search(event) {
-    //     event.preventDefault();
-
-    //     document.getElementById('externals').innerHTML = '';
-    //     loadExternalLinks();
-    //     initializeExternalsLayoutAttr();
-    //     initializeCondenseAttr();
-
-    //     var query = $('#search_query').val();
-        
-
-    //     if (query.startsWith('!')) {
-    //         window.location.href = 'https://infinitysearch.co/results?q=' + query;
-    //         return;
-    //     }
-
-    //     load_results(query, '1');
-        
-    // }
-
-    // var form = document.getElementById("input_form");
-    // form.addEventListener("submit", submit_new_search, true);
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
 </script>
+
 <script type="text/javascript" src="{{url_for('static', filename='js/results.js')}}"></script>
 <script src="https://infinitysearch.co/static/js/unit_conversion.js" defer></script>
 <script src="https://infinitysearch.co/static/js/color_picker.js" defer></script>
