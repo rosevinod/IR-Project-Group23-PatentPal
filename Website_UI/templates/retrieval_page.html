@@ -63,7 +63,7 @@
 </a>
 <div id="input_text_area" class="field has-addons">
 <div class="control is-expanded" style="margin-left: 12px;">
-<textarea class="input is-small" name = "search_box" type="search" placeholder="Enter Keywords" value="" onfocus="this.select()" required>{% if show_hidden == True %}{{search_query}}{% endif %}</textarea>
+<textarea class="input is-small" rows="1" name = "search_box" type="search" placeholder="Enter Keywords" value="" onfocus="this.select()" required>{% if show_hidden == True %}{{search_query}}{% endif %}</textarea>
 </div>
 <div class="control">
 <button class="button input is-small search-button-icon"><img src="https://infinitysearch.co/static/images/fa/search.svg" style="height: 22px; width: 22px; min-width: .87em;">
@@ -138,8 +138,10 @@ reset
     <div class="card" style="margin-bottom: 0.8rem;">
     <div class="card-content">
     <div class="content">
-    <div class = "collapsible">{{abstract_list[0]}}</div>
-    <div class = "content1"><p>{{description_list[0]}}</p></div> 
+    <div class = "collapsible">
+    <p style="color: blue">Publication No: {{outputs[i][0]}}; Category: {{outputs[i][1]}}</p>
+    <div><b>Abstract:</b> {{outputs[i][2]}}</div></div>
+    <div class = "content1"><b>Description:</b> {{outputs[i][3]}}</div> 
     </div>
     </div>
     </div>
