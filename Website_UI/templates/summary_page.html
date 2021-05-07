@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PatentPal - search</title>
+<title>PatentPal - Summary</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="monetization" content="$ilp.uphold.com/AzDfkEqpUKeb">
 <link rel="search" type="application/opensearchdescription+xml" title="Infinity Search" href="https://infinitysearch.co/opensearch.xml">
 <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.4.1.min.js')}}"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://infinitysearch.co/static/css/normalize.css">
 <style> a.toplink {
         color: black;
@@ -106,12 +107,20 @@ reset
 <div class="columns">
 <div class="column is-9 results_column" style="padding-top: 1.2rem; padding-right: .5rem;">
     <br>
+  {% with messages = get_flashed_messages(with_categories=true)%}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
 <div class="field">
-  
   <label class="label">Paste Patent <span class="icon is-small"><img src="{{url_for('static', filename='images/paste-solid.svg')}}"></span></label>
   <form action="{{ url_for('summarise')}}" method="post">
   <div class="control">
-    <textarea class="textarea is-info" name = "input_patent" placeholder="Input Patent">{% if show_hidden == True %}{{input_text}}{% endif %}</textarea>
+    <textarea class="textarea is-info" name = "input_patent" placeholder="Input Patent" required>{% if show_hidden == True %}{{input_text}}{% endif %}</textarea>
   </div>
     <br>
     <div class="field is-grouped">
@@ -145,6 +154,12 @@ reset
 <script src="https://infinitysearch.co/static/js/rand_num_generation.js" defer></script>
 <script src="https://infinitysearch.co/static/js/stopwatch_timer.js" defer></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/theme_bottom.js')}}" defer></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
 <style id="custom_css_placeholder_results">
 
 </style>

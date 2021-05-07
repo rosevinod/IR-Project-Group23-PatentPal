@@ -1,9 +1,10 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, flash
 # import summary
 import retrieval_lib
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '612202c1ba464e2083b8287e8a1f5554'
 
 def clean_text(text):
     text = text.replace(" .", ".")
@@ -24,7 +25,7 @@ def clean_text(text):
 
 def get_results(search_query):
     if search_query != "":
-        outputs = retrieval_lib.retrieve_patents(search_query)
+        outputs, query = retrieval_lib.retrieve_patents(search_query)
 
         for i in outputs:
             i[2] = clean_text(i[2])
@@ -36,7 +37,7 @@ def get_results(search_query):
             i[2] = upd
             i[3] = clean_text(i[3])
 
-        return outputs
+        return outputs, query
     return None
 
 @app.route("/", methods = ['GET', 'POST'])
@@ -47,11 +48,20 @@ def home():
 @app.route("/retrieval", methods = ['GET', 'POST'])
 def retrieval():
     search_query = request.form.get("search_box")
-    print(search_query)
+    # print(search_query)
+
+    if len(search_query.split()) < 1:
+        return render_template("retrieval_page.html", show_hidden = False)
+
     if request.method == "POST":
-        results =  get_results(search_query)
+        results, query =  get_results(search_query)
+
+        query_var = False
+        if query != search_query:
+            query_var = True
+
         if results is not None:
-            return render_template("retrieval_page.html", show_hidden = True, search_query = search_query, len = 10, outputs = results)
+            return render_template("retrieval_page.html", show_hidden = True, search_query = search_query, len = len(results), outputs = results, query_var=query_var, upd_query = query)
 
     return render_template("retrieval_page.html", show_hidden = False)
 
@@ -62,6 +72,9 @@ def summarise():
 
     if request.method == "POST":
         input_text = request.form.get("input_patent")
+        if len(input_text.split()) < 100:
+            flash(f'Please enter at least 100 words for summarisation', 'danger')
+            return render_template("summary_page.html", show_hidden = False)
         if input_text != "":
             output_text = "abcd  hello"
             # output_text = summary.get_summary(input_text)
@@ -69,6 +82,7 @@ def summarise():
 
     return render_template("summary_page.html", show_hidden = False)
 
+# punctation marks, random words - Pegasus
 
 if __name__ == "__main__":
     app.run(debug = True)
