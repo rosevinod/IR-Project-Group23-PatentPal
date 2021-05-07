@@ -128,6 +128,16 @@ reset
 </ul>
 </div>
 </div>
+
+{% if query_var %}
+<div class="columns">
+<div class="column is-9 results_column" style="padding-top: 1.2rem; padding-right: .5rem;">
+  <span style="font-size: 18px">
+  <p><span style="color: red"><i>Did you mean: </i></span><span style="color: purple"><b>{{upd_query}}?</b></span></p>
+  </span>
+</div>
+</div>
+{% endif %}
 <div class="columns">
 <div class="column is-9 results_column" style="padding-top: 1.2rem; padding-right: .5rem;">
 <div class="column" id="loading_bar" style="padding-top: 0;">

@@ -12,5 +12,6 @@ def get_summary(input_text):
 	tgt_text = tokenizer.batch_decode(translated, skip_special_tokens=True)
 	return tgt_text[0]
 	
-
-
+if __name__ == "__main__":
+    txt = input()
+    print(get_summary(txt))
