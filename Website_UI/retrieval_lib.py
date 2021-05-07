@@ -6,6 +6,7 @@ import nltk
 import string
 import pickle
 from rank_bm25 import BM25Okapi
+from spellchecker import SpellChecker
 
 def remove_stopwords(data):
   stop_words = set(stopwords.words('english'))
@@ -22,6 +23,14 @@ def remove_punc(data):
       new_data.append(w)
   return new_data
 
+def spellcheck(data):
+  new_data = []
+  spell = SpellChecker()
+  for w in data:
+    new_word = spell.correction(w)
+    new_data.append(new_word)
+  return new_data
+
 def lemmatizer(data):
   new_data = []
   lemm = WordNetLemmatizer()
@@ -35,6 +44,7 @@ def preprocess(data):
   data = word_tokenize(data)
   data = remove_stopwords(data)
   data = remove_punc(data)
+  data = spellcheck(data)
   data = lemmatizer(data)
   return data
 
