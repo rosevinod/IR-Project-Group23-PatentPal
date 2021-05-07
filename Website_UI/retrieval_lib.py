@@ -7,7 +7,6 @@ import string
 import pickle
 from rank_bm25 import BM25Okapi
 from spellchecker import SpellChecker
-
 spell = SpellChecker()
 
 def remove_stopwords(data):
