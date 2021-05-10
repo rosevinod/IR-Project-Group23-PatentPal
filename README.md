@@ -32,4 +32,4 @@ Install the following dependencies using pip3
 ### Steps
 1. `cd Website_UI`
 2. `python3 app.py`
-3. Run on localhost/5000
+3. Open localhost:5000 on browser.

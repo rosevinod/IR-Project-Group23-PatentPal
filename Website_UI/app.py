@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, redirect, request, flash
-# import summary
+import summary
 import retrieval_lib
 
 
@@ -76,8 +76,8 @@ def summarise():
             flash(f'Please enter at least 100 words for summarisation', 'danger')
             return render_template("summary_page.html", show_hidden = False)
         if input_text != "":
-            output_text = "abcd  hello"
-            # output_text = summary.get_summary(input_text)
+            # output_text = "abcd  hello"
+            output_text = summary.get_summary(input_text)
             return render_template("summary_page.html", show_hidden = True, input_text = input_text, output_text = output_text)
 
     return render_template("summary_page.html", show_hidden = False)
