@@ -33,3 +33,17 @@ Install the following dependencies using pip3
 1. `cd Website_UI`
 2. `python3 app.py`
 3. Open localhost:5000 on browser.
+
+
+## User Interface
+
+### Home Page
+![home](https://user-images.githubusercontent.com/43749855/117653282-d1ac7480-b1b1-11eb-80e4-dc5361a1a98e.png)
+
+### Retrieval Page
+![retrieval](https://user-images.githubusercontent.com/43749855/117653270-cce7c080-b1b1-11eb-8cce-3731c25f7e57.png)
+
+### Summary Page
+![summary](https://user-images.githubusercontent.com/43749855/117653275-cfe2b100-b1b1-11eb-948e-f4b40c06736a.png)
+
+
