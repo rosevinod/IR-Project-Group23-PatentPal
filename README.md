@@ -16,3 +16,20 @@ Summary Directory: The Baselines Codes for summarisation models are in this dire
 
 Retrieval Directory: The Baselines Codes for retrieving patens are in this directory.
 
+## Using the system
+
+### Required Python Libraries
+Install the following dependencies using pip3
+- `pip3 install flask`
+- `pip3 install transformers`
+- `pip3 install pandas`
+- `pip3 install nltk`
+- `pip3 install pyspellchecker`
+- `pip3 install pytorch torchvision -c pytorch`
+- `pip3 install torch torchvision`
+- `pip3 install rank_bm25`
+
+### Steps
+1. `cd Website_UI`
+2. `python3 app.py`
+3. Run on localhost/5000
